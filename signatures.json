@@ -1,0 +1,97 @@
+{
+  "aws_s3": {
+    
+    "http_fingerprint": "The specified bucket does not exist",
+    "alternative_fingerprints": [
+      "NoSuchBucket",
+      "<Code>NoSuchBucket</Code>"
+    ],
+    "provider": "AWS S3",
+    "status": "vulnerable",
+    "cname_patterns": [
+            "*.s3-w.us-east-1.amazonaws.com",
+      "s3-w.us-east-1.amazonaws.com",
+      "s3-1-w.amazonaws.com",
+      "*.s3-1-w.amazonaws.com"
+    ],
+    "severity": "critical",
+    "notes": "Bucket name is globally unique. If the bucket name is already taken by someone else, it cannot be claimed."
+  },
+  "github_pages": {
+    "provider": "GitHub Pages",
+    "status": "vulnerable",
+    "cname_patterns": [
+      "*.github.io"
+    ],
+    "http_fingerprint": "There isn't a GitHub Pages site here",
+    "alternative_fingerprints": [
+      "There isn't a Github Pages site here."
+    ],
+    "severity": "high",
+    "notes": "Need to ensure the target GitHub username/organization still exists but the Pages site has been deleted."
+  },
+  "heroku": {
+    "provider": "Heroku",
+    "status": "edge_case",
+    "cname_patterns": [
+      "*.herokuapp.com",
+      "*.herokudns.com",
+      "*.herokussl.com"
+    ],
+    "http_fingerprint": "No such app",
+    "alternative_fingerprints": [
+      "There's nothing here, yet."
+    ],
+    "severity": "high",
+    "notes": "Heroku now typically requires domain verification. Fingerprint matching alone is insufficient; additional confirmation of whether the app name can be claimed is needed."
+  },
+  "azure_app_service": {
+    "provider": "Microsoft Azure App Service",
+    "status": "edge_case",
+    "cname_patterns": [
+      "*.azurewebsites.net",
+      "*.cloudapp.net",
+      "*.cloudapp.azure.com",
+      "*.trafficmanager.net",
+      "*.azureedge.net"
+    ],
+    "http_fingerprint": "404 Web Site not found",
+    "alternative_fingerprints": [],
+    "severity": "high",
+    "notes": "Azure has domain verification mechanisms; many App Services are protected by TXT records and cannot be directly claimed. The 'edge_case' status reflects this uncertainty."
+  },
+  "netlify": {
+    "provider": "Netlify",
+    "status": "edge_case",
+    "cname_patterns": [
+      "*.netlify.app",
+      "*.netlify.com"
+    ],
+    "http_fingerprint": "Not Found - Request ID:",
+    "alternative_fingerprints": [],
+    "severity": "high",
+    "notes": "Netlify also has domain verification; similar to Azure, it requires manual verification of whether it can be claimed."
+  },
+  "surge_sh": {
+    "provider": "Surge.sh",
+    "status": "vulnerable",
+    "cname_patterns": [
+      "*.surge.sh"
+    ],
+    "http_fingerprint": "project not found",
+    "alternative_fingerprints": [],
+    "severity": "medium",
+    "notes": "Simple static hosting service; fingerprints are clear, and claiming the corresponding project name usually allows takeover."
+  },
+  "tumblr": {
+    "provider": "Tumblr",
+    "status": "vulnerable",
+    "cname_patterns": [
+      "*.tumblr.com"
+    ],
+    "http_fingerprint": "Whatever you were looking for doesn't currently exist at this address",
+    "alternative_fingerprints": [],
+    "severity": "medium",
+    "notes": "Need to confirm whether the corresponding Tumblr blog name has been released."
+  }
+}
